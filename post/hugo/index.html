@@ -107,7 +107,7 @@
 <p>如果出现hugo版本信息，则说明已经安装成功，可以进行下一步。</p>
 </li>
 <li>
-<p>Windous用户请前往<a href="https://gohugo.io/installation/">Hugo官方网站</a>选取适合你系统版本的安装包进行安装，更多信息可以在<a href="https://github.com/gohugoio/hugo#choose-how-to-install">Hugo的Github仓库</a>获取，官方亦提供了通过Github 直接clone的方式进行下载，此处不再赘述。</p>
+<p>Windows用户请前往<a href="https://gohugo.io/installation/">Hugo官方网站</a>选取适合你系统版本的安装包进行安装，更多信息可以在<a href="https://github.com/gohugoio/hugo#choose-how-to-install">Hugo的Github仓库</a>获取，官方亦提供了通过Github 直接clone的方式进行下载，此处不再赘述。</p>
 </li>
 </ul>
 <h3 id="创建站点">创建站点</h3>
@@ -162,7 +162,7 @@
 <p>在目前很多的教程经验贴或者视频教程中，会使用：</p>
 <p><code>git remote add origin 仓库地址</code></p>
 <p>以本站为例，如果直接使用：</p>
-<p><code>git remote add origin https://FlamesOnly//flamesonly.github.io.git</code></p>
+<p><code>git remote add origin https://FlamesOnly/flamesonly.github.io.git</code></p>
 <p>后续将会提示输入用户名和密码进行权限验证，但值得注意的是，Github在2021年8月已经<strong>停止用username + password来对git操作进行身份验证</strong>，取而代之的是使用令牌进行验证。</p>
 <p>因此，我们最好使用personal token来进行身份验证。操作如下：</p>
 <ol>
@@ -174,7 +174,7 @@
 <p>生成一个token，并注意妥善保存，因为页面一旦刷新后，你将无法再看见该token。</p>
 <p>接着，我们回到myblog目录，<code>cd public</code></p>
 <p>使用命令：</p>
-<p><code>git remote add origin https://&lt;刚刚生成的token&gt;@github.com//&lt;username&gt;/&lt;repository&gt;.git</code></p>
+<p><code>git remote add origin https://&lt;刚刚生成的token&gt;@github.com/&lt;username&gt;/&lt;repository&gt;.git</code></p>
 <p>将username和repository替换为你自己的用户名及仓库地址。</p>
 <p>再使用命令：</p>
 <p><code>git remote -v</code></p>
