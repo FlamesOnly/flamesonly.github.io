@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>My Blog on Flames</title>
+    <link>http://flamesonly.github.io/post/</link>
+    <description>Recent content in My Blog on Flames</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 Apr 2023 21:12:16 +0800</lastBuildDate><atom:link href="http://flamesonly.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何使用hugo搭建个人静态博客（Github托管）</title>
+      <link>http://flamesonly.github.io/post/hugo/</link>
+      <pubDate>Wed, 05 Apr 2023 21:12:16 +0800</pubDate>
+      
+      <guid>http://flamesonly.github.io/post/hugo/</guid>
+      <description>操作环境 操作系统 ： MacOS 11.3.1 （M1） 工具包： VScode、Git 前置条件 拥有一个Github账号 Mac用户建议提前安装brew，并使用brew install hugo</description>
+    </item>
+    
+  </channel>
+</rss>

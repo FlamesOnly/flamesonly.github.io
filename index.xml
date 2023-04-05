@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flames</title>
+    <link>http://flamesonly.github.io/</link>
+    <description>Recent content on Flames</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 Apr 2023 21:12:16 +0800</lastBuildDate><atom:link href="http://flamesonly.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何使用hugo搭建个人静态博客（Github托管）</title>
+      <link>http://flamesonly.github.io/post/hugo/</link>
+      <pubDate>Wed, 05 Apr 2023 21:12:16 +0800</pubDate>
+      
+      <guid>http://flamesonly.github.io/post/hugo/</guid>
+      <description>操作环境 操作系统 ： MacOS 11.3.1 （M1） 工具包： VScode、Git 前置条件 拥有一个Github账号 Mac用户建议提前安装brew，并使用brew install hugo</description>
+    </item>
+    
+    <item>
+      <title>2022-09-02</title>
+      <link>http://flamesonly.github.io/note/note2/</link>
+      <pubDate>Fri, 02 Sep 2022 10:22:14 +0800</pubDate>
+      
+      <guid>http://flamesonly.github.io/note/note2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>2022-09-01</title>
+      <link>http://flamesonly.github.io/note/note1/</link>
+      <pubDate>Thu, 01 Sep 2022 10:21:27 +0800</pubDate>
+      
+      <guid>http://flamesonly.github.io/note/note1/</guid>
+      <description>Note</description>
+    </item>
+    
+    <item>
+      <title>My Project</title>
+      <link>http://flamesonly.github.io/projects/project1/</link>
+      <pubDate>Thu, 01 Sep 2022 10:17:19 +0800</pubDate>
+      
+      <guid>http://flamesonly.github.io/projects/project1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>My Project</title>
+      <link>http://flamesonly.github.io/projects/project2/</link>
+      <pubDate>Thu, 01 Sep 2022 10:17:19 +0800</pubDate>
+      
+      <guid>http://flamesonly.github.io/projects/project2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>My Project</title>
+      <link>http://flamesonly.github.io/projects/project3/</link>
+      <pubDate>Thu, 01 Sep 2022 10:17:19 +0800</pubDate>
+      
+      <guid>http://flamesonly.github.io/projects/project3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>http://flamesonly.github.io/about/</link>
+      <pubDate>Thu, 11 Aug 2022 10:24:26 +0800</pubDate>
+      
+      <guid>http://flamesonly.github.io/about/</guid>
+      <description>Github: FlamesOnly</description>
+    </item>
+    
+  </channel>
+</rss>

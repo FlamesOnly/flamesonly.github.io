@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class='theme-container'>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    <title>如何使用hugo搭建个人静态博客（Github托管）</title>
+
+    <link rel="canonical" href="http://flamesonly.github.io/">
+
+    
+    <link rel='stylesheet' type='text/css' href='/css/common.min.2e0fcb1a7000d167fb8edc8795fd7fa375f12491a92c7e9c4e7cbaabf45d4c90.css'/>
+    
+    <link rel='stylesheet' media='screen and (min-width: 1201px)' type='text/css'
+          href='/css/normal.min.c46acb505230270efd7c6e141090cb0d8929be27c04e426816632c376c4c49ea.css'/>
+    
+    <link rel='stylesheet' media='screen and (max-width: 1200px)' type='text/css'
+          href='/css/small.min.cff497b4416dfb7de7e24706a8a25fc3efb8dfd2f8627449c114a139a67da2a7.css'/>
+
+    
+    <link rel='stylesheet' type='text/css' href='/css/androidstudio.min.min.c0869a17349d3f1bdd078763e8c11ec9808c9f38239bb254720577662fba87bf.css'/>
+    
+    <script src="/js/highlight.min.min.527b2c4dd19de47518d2a0fbbf849f2cf1230a7e6e40ee0f416f4de8f8539fbf.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<script>
+    hljs.highlightAll();
+</script>
+<body>
+
+<div class="top">
+    <a href="/">
+        <img src="/img/logo.png"/>
+    </a>
+    <nav>
+        
+        <a href="/post/">
+            Blog
+        </a>
+        
+        <a href="/note/">
+            Note
+        </a>
+        
+        <a href="/projects/">
+            Projects
+        </a>
+        
+        <a href="/about">
+            About
+        </a>
+        
+    </nav>
+</div>
+
+<div id="center" class='center' >
+    
+<header class="center_head">
+    <h1>
+    如何使用hugo搭建个人静态博客（Github托管）
+</h1>
+<div style="text-align: center;opacity: 0.5;margin-top: 0.5em;">
+    2023.04.05 21:12
+</div>
+</header>
+
+    
+<div class="center_main">
+    <a href="../" class="center_main_contents_left">
+        <h1>My Blog</h1>
+    </a>
+    <style>
+    .content_post h2::before {
+        content: "※ ";
+    }
+
+    .content_post h3::before {
+        content: "✧ ";
+    }
+</style>
+<article class="content_post heti heti--ancient">
+    <h2 id="操作环境">操作环境</h2>
+<p>操作系统 ： MacOS 11.3.1 （M1）</p>
+<p>工具包： VScode、Git</p>
+<h2 id="前置条件">前置条件</h2>
+<ol>
+<li>拥有一个Github账号</li>
+<li>Mac用户建议提前安装brew，并使用<code>brew install hugo</code> 命令安装hugo；Windous用户请前往<a href="https://gohugo.io/installation/">Hugo官方网站</a>选取适合你系统版本的安装包进行安装。</li>
+<li>安装Git并掌握Git的入门级使用方法</li>
+</ol>
+<h2 id="搭建过程">搭建过程</h2>
+<p>整个搭建过程主要包括下载Hugo、创建站点、托管站点、个性化设置等各方面，下面将进行分步说明：</p>
+<h3 id="下载hugo">下载Hugo</h3>
+<ul>
+<li>
+<p>Mac用户建议提前安装brew，打开terminal，输入命令：</p>
+<p><code>brew install hugo</code></p>
+<p>等待安装完成即可；</p>
+<p>安装完成后，输入命令：</p>
+<p><code>hugo version</code></p>
+<p>如果出现hugo版本信息，则说明已经安装成功，可以进行下一步。</p>
+</li>
+<li>
+<p>Windous用户请前往<a href="https://gohugo.io/installation/">Hugo官方网站</a>选取适合你系统版本的安装包进行安装，更多信息可以在<a href="https://github.com/gohugoio/hugo#choose-how-to-install">Hugo的Github仓库</a>获取，官方亦提供了通过Github 直接clone的方式进行下载，此处不再赘述。</p>
+</li>
+</ul>
+<h3 id="创建站点">创建站点</h3>
+<p>成功下载完毕后，我们需要创建一个新的站点，打开Terminal，输入命令：</p>
+<p><code>hugo new site myblog</code></p>
+<p>此处myblog为新站点存储源文件的所在地，你可以任意取一个你喜欢的名字。</p>
+<p>之后，使用命令：</p>
+<p><code>cd  /users/appleusername/myblog</code></p>
+<p>进入myblog文件夹，（注意，将appleusername替换为你自己的用户名）再使用：<code>ls -l</code>命令，即可看见hugo自动生成的目录结构。</p>
+<p>其中，几个重要的目录作一些解释：</p>
+<ul>
+<li>content 目录 存放将来发布在网站上的markdown文章</li>
+<li>static 目录 存放静态资源，如网站logo，icon等，还有其他图片资源等</li>
+<li>config.toml 博客的配置文件</li>
+</ul>
+<p>此时，我们已经成功创建了一个新的site。接下来，我们尝试添加一篇markdown文章。</p>
+<p>使用命令：</p>
+<p><code>hugo new post/first.md</code></p>
+<p>该命令将会在前文提及的content目录下，创建post子目录并自动生成一篇markdown格式的文章。此时，我们使用VScode打开myblog文件夹，在content目录下找到post/first.md文件，即可进行博客内容的写作。</p>
+<p>至此，我们已经完成了hugo博客的创建和第一篇博客的撰写。</p>
+<p>但在尝试运行该博客之前，我们最好先去下载一个喜欢的theme。这是因为hugo默认生成的站点没有任何皮肤模版，此时直接使用<code>hugo server</code>命令本地运行并打开localhost:1313的话，只能看到一个“Page Not Found”。</p>
+<p>所以，我们先前往<a href="https://themes.gohugo.io/">Hugo官网</a>，寻找一个自己喜欢的theme。通常情况下，每一个theme都有一个Demo或者exampleSite可供效果预览，作者亦提供了相应的说明文档。因此我们只需挑选一个自己喜欢的theme，再回到Terminal：</p>
+<p><code>cd myblog</code></p>
+<p>这里随意举例，假使我需要下载<a href="https://themes.gohugo.io/themes/hugo-blog-awesome/">这个hugo blog awesome</a>，进入该主题的页面，下拉即可找到作者给出的下载方法，在myblog目录下使用命令：</p>
+<p><code>git clone https://github.com/hugo-sid/hugo-blog-awesome.git themes/hugo-blog-awesome</code></p>
+<p>即可将该theme下载到本地themes目录下。</p>
+<h5 id="注意">注意</h5>
+<p>下载好的theme会有默认的baseUrl，通常是localhost:1313，如果要进行下一步远程托管，务必在配置文件中将baseUrl修改为自己的仓库地址，否则即使代码push成功，也无法访问页面。</p>
+<p>下载完毕后，我们回到根目录myblog，使用命令：</p>
+<p><code>hugo</code></p>
+<p>进行编译，编译后的文件会自动存储在public文件夹下。</p>
+<p>接着，我们尝试在本地运行一下，在myblog目录下使用命令：</p>
+<p><code>hugo server --theme=你下载好的theme的名称 --buildDrafts</code></p>
+<p>如果看见提示：</p>
+<p>Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)</p>
+<p>Press Ctrl+C to stop</p>
+<p>说明本地运行成功，打开浏览器，访问localhost:1313，即可预览页面效果，同时我们刚刚写好的first.md也会出现在页面上。</p>
+<p>按下 Ctrl+C 结束本地运行。</p>
+<h3 id="托管站点">托管站点</h3>
+<p>当我们在本地尝试运行该博客成功后，想要通过公网访问有多种办法，这里主要详讲如何使用Github进行托管。</p>
+<p>首先，我们需要在自己的Github账户中，创建一个新的repository，仓库名命名为“githubusername.github.io”，请将githubusername替换为你自己的username。</p>
+<p>第二步，回到本地myblog目录，cd进入public文件夹，使用命令：</p>
+<p><code>git init</code></p>
+<p>初始化一下本地仓库</p>
+<p>在这一步骤中，我们随时可以使用<code>git status</code>命令查看仓库中的情况。</p>
+<p><code>git add .</code></p>
+<p>将所有文件提交到暂存区</p>
+<p><code>git commit -m &quot;first commit&quot;</code></p>
+<p>将暂存区的文件commit到本地仓库</p>
+<p>接下来，我们需要将本地仓库与远程Github仓库进行连接，方便后续push文件。</p>
+<h4 id="此处划重点">此处划重点</h4>
+<p>在目前很多的教程经验贴或者视频教程中，会使用：</p>
+<p><code>git remote add origin 仓库地址</code></p>
+<p>以本站为例，如果直接使用：</p>
+<p><code>git remote add origin https://FlamesOnly//flamesonly.github.io.git</code></p>
+<p>后续将会提示输入用户名和密码进行权限验证，但值得注意的是，Github在2021年8月已经<strong>停止用username + password来对git操作进行身份验证</strong>，取而代之的是使用令牌进行验证。</p>
+<p>因此，我们最好使用personal token来进行身份验证。操作如下：</p>
+<ol>
+<li>登录个人Github账户</li>
+<li>找到settings，拉到最下方，找到Developer settings</li>
+<li>找到第3个菜单&mdash;Personal access tokens</li>
+<li>选择Generate new token</li>
+</ol>
+<p>生成一个token，并注意妥善保存，因为页面一旦刷新后，你将无法再看见该token。</p>
+<p>接着，我们回到myblog目录，<code>cd public</code></p>
+<p>使用命令：</p>
+<p><code>git remote add origin https://&lt;刚刚生成的token&gt;@github.com//&lt;username&gt;/&lt;repository&gt;.git</code></p>
+<p>将username和repository替换为你自己的用户名及仓库地址。</p>
+<p>再使用命令：</p>
+<p><code>git remote -v</code></p>
+<p>如果可以看见</p>
+<p>https://&lt;刚刚生成的token&gt;@github.com//<!-- raw HTML omitted -->/<!-- raw HTML omitted -->.git（fetch）</p>
+<p>https://&lt;刚刚生成的token&gt;@github.com//<!-- raw HTML omitted -->/<!-- raw HTML omitted -->.git（push）</p>
+<p>则已经完成了这一步骤</p>
+<p>成功连接远程仓库后，我们使用如下命令进行代码和文件的push，<strong>注意push之前配置文件中是否已经修改了baseUrl为自己的仓库地址，否则push成功也无法访问到页面。</strong></p>
+<p>这里仍然需要在public目录下进行，因为本地仓库在这里：</p>
+<p><code>git push -u origin master</code></p>
+<p>如果提示fatal，无法访问你的仓库，是因为众所周知的网络原因，多次反复尝试push即可；如果提示别的错误，请重新检查远程仓库地址是否指定正确，以及本地Git是否配置正确（是否已经设置username和email）。</p>
+<p>至此，我们就成功地将本地的hugo博客托管到了github上。</p>
+<p>打开浏览器，输入<!-- raw HTML omitted -->的地址，即可通过公网访问你的博客了。</p>
+<p>以本站为例，输入”flamesonly.github.io“，你将访问到本站的首页。</p>
+<h3 id="个性化设置">个性化设置</h3>
+<p>虽然现成的主题已经能够让我们拥有一个美观的博客页面，但我们仍然希望其中的一些个性化设置可以由自己指定，比如博客的名称，我们不想使用默认的“My Hugo site”，则需要在配置文件中进行修改。</p>
+<p>对于初学者来说，最推荐的方法是将现有主题的config文件直接copy到myblog的根目录，替代默认生成的config.toml文件，并在其中进行个性化的修改。</p>
+<p>不同的主题可能会使用不同格式的配置文件，包括但不限于yaml、toml等，通常title属性就是该博客的名称，footer则是页面下方的版权字体等，我们皆可以根据自己的需要进行修改。</p>
+<p>至于其他进一步的个性化设置，个人认为自行探索是更有乐趣的。</p>
+<p>如果还不懂如何修改配置文件，可以先学习一些HTML基础知识以及善用搜索引擎了解该类格式下配置文件各种属性的作用，即可进行一些简单的修改。</p>
+<p>至此，我们就成功地搭建好了一个可以通过公网访问的个人网站。</p>
+
+</article>
+
+    <div class="center_main_contents_title">
+    <h2>目录</h2>
+</div>
+<div class="center_main_contents_main">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#操作环境">操作环境</a></li>
+    <li><a href="#前置条件">前置条件</a></li>
+    <li><a href="#搭建过程">搭建过程</a>
+      <ul>
+        <li><a href="#下载hugo">下载Hugo</a></li>
+        <li><a href="#创建站点">创建站点</a></li>
+        <li><a href="#托管站点">托管站点</a></li>
+        <li><a href="#个性化设置">个性化设置</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+
+</div>
+</body>
+
+
+
+
+
+</html>
