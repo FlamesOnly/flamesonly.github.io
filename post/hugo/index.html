@@ -91,7 +91,7 @@
 <h2 id="前置条件">前置条件</h2>
 <ol>
 <li>拥有一个Github账号</li>
-<li>Mac用户建议提前安装brew，并使用<code>brew install hugo</code> 命令安装hugo；Windous用户请前往<a href="https://gohugo.io/installation/">Hugo官方网站</a>选取适合你系统版本的安装包进行安装。</li>
+<li>Mac用户建议提前安装brew，并使用<code>brew install hugo</code> 命令安装hugo；Windows用户请前往<a href="https://gohugo.io/installation/">Hugo官方网站</a>选取适合你系统版本的安装包进行安装。</li>
 <li>安装Git并掌握Git的入门级使用方法</li>
 </ol>
 <h2 id="搭建过程">搭建过程</h2>
@@ -148,7 +148,7 @@
 <p>按下 Ctrl+C 结束本地运行。</p>
 <h3 id="托管站点">托管站点</h3>
 <p>当我们在本地尝试运行该博客成功后，想要通过公网访问有多种办法，这里主要详讲如何使用Github进行托管。</p>
-<p>首先，我们需要在自己的Github账户中，创建一个新的repository，仓库名命名为“githubusername.github.io”，请将githubusername替换为你自己的username。</p>
+<p>首先，我们需要在自己的Github账户中，创建一个新的repository，仓库名命名为“githubusername.github.io”，请将githubusername替换为你自己的username。(注意，仓库必须设置为public，如果设置为private，也无法通过公网访问自己的个人博客)</p>
 <p>第二步，回到本地myblog目录，cd进入public文件夹，使用命令：</p>
 <p><code>git init</code></p>
 <p>初始化一下本地仓库</p>
@@ -163,7 +163,7 @@
 <p><code>git remote add origin 仓库地址</code></p>
 <p>以本站为例，如果直接使用：</p>
 <p><code>git remote add origin https://FlamesOnly/flamesonly.github.io.git</code></p>
-<p>后续将会提示输入用户名和密码进行权限验证，但值得注意的是，Github在2021年8月已经<strong>停止用username + password来对git操作进行身份验证</strong>，取而代之的是使用令牌进行验证。</p>
+<p>后续将会提示输入用户名和密码进行权限验证，但值得注意的是，Github在2021年8月已经<strong>停止用username + password来对git操作进行身份验证</strong>，取而代之的是使用令牌进行验证。（如果你使用的教程发表于2021年8月前，这里需要尤其注意）</p>
 <p>因此，我们最好使用personal token来进行身份验证。操作如下：</p>
 <ol>
 <li>登录个人Github账户</li>
