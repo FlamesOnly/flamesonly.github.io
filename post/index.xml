@@ -6,7 +6,16 @@
     <description>Recent content in My Blog on Flames</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Apr 2023 21:12:16 +0800</lastBuildDate><atom:link href="http://flamesonly.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 16 Apr 2023 18:36:16 +0800</lastBuildDate><atom:link href="http://flamesonly.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetode 92 反转链表 II 双指针解题思路</title>
+      <link>http://flamesonly.github.io/post/leetcode92/</link>
+      <pubDate>Sun, 16 Apr 2023 18:36:16 +0800</pubDate>
+      
+      <guid>http://flamesonly.github.io/post/leetcode92/</guid>
+      <description>Leetode 92 反转链表 II 双指针解题思路 Leetode 92 反转链表 II 题目分析 题目 给你单链表的头指针 head 和两个整数 left 和 right ，其中 left &amp;lt;= right 。请你反转从位置 left 到位置 right 的链表节点，</description>
+    </item>
+    
     <item>
       <title>如何使用hugo搭建个人静态博客（Github托管）</title>
       <link>http://flamesonly.github.io/post/hugo/</link>
