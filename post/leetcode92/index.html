@@ -89,8 +89,7 @@
 <p><a href="https://leetcode.cn/problems/reverse-linked-list-ii/">Leetode 92 反转链表 II</a></p>
 <h2 id="题目分析">题目分析</h2>
 <p><strong>题目</strong> 给你单链表的头指针 head 和两个整数 left 和 right ，其中 left &lt;= right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。</p>
-<pre><code>由题设可以得知，left 和 right 是整数，含义为第left个节点和第right个结点。因此我们自然可以想到一个简单的思路：即，将left的前一个节点和right的后一个节点记下，将left和right中间段的子链表反转过后再重新连接完整链表即可。
-</code></pre>
+<p>由题设可以得知，left 和 right 是整数，含义为第left个节点和第right个结点。因此我们自然可以想到一个简单的思路：即，将left的前一个节点和right的后一个节点记下，将left和right中间段的子链表反转过后再重新连接完整链表即可。</p>
 <h2 id="代码思路">代码思路</h2>
 <ul>
 <li>虚拟头节点</li>
@@ -101,7 +100,7 @@
 <ul>
 <li>记录left的前一个节点</li>
 </ul>
-<p>​		使用变量count计数，双指针pre和cur依次遍历并且直到找到left</p>
+<p>​		使用变量count计数，双指针pre和cur依次遍历,直到找到left.</p>
 <p>​		<code>int count = 1;</code></p>
 <p>​		<code>ListNode pre = dummyHead;</code></p>
 <p>​		<code>ListNode cur = head;</code></p>
@@ -133,7 +132,7 @@
 </li>
 </ul>
 <h2 id="总结">总结</h2>
-<pre><code>本题重点是用了双指针的思路，并且只遍历了一次链表，把子链表反转逻辑切割成完整的单链表反转，在边界问题处理上使用了虚拟头节点。</code></pre>
+<p>本题重点是用了双指针的思路，并且只遍历了一次链表，把子链表反转逻辑切割成完整的单链表反转，在边界问题处理上使用了虚拟头节点。</p>
 
 </article>
 
