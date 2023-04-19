@@ -7,7 +7,7 @@
     <meta name="referrer" content="no-referrer">
     
 
-    <title>Leetcode 92 反转链表 II 双指针解题思路</title>
+    <title>Leetcode 61 旋转链表 成环方法解题思路</title>
 
     <link rel="canonical" href="http://flamesonly.github.io/">
 
@@ -63,10 +63,10 @@
     
 <header class="center_head">
     <h1>
-    Leetcode 92 反转链表 II 双指针解题思路
+    Leetcode 61 旋转链表 成环方法解题思路
 </h1>
 <div style="text-align: center;opacity: 0.5;margin-top: 0.5em;">
-    2023.04.16 18:36
+    2023.04.19 18:44
 </div>
 </header>
 
@@ -85,67 +85,76 @@
     }
 </style>
 <article class="content_post heti heti--ancient">
-    <h1 id="leetcode-92-反转链表-ii-双指针解题思路">Leetcode 92 反转链表 II 双指针解题思路</h1>
-<p><a href="https://leetcode.cn/problems/reverse-linked-list-ii/">Leetcode 92 反转链表 II</a></p>
-<h2 id="题目分析">题目分析</h2>
-<p><strong>题目</strong> 给你单链表的头指针 head 和两个整数 left 和 right ，其中 left &lt;= right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。</p>
-<p>由题设可以得知，left 和 right 是整数，含义为第left个节点和第right个节点。因此我们自然可以想到一个简单的思路：即，将left的前一个节点和right的后一个节点记下，将left和right中间段的子链表反转过后再重新连接完整链表即可。</p>
+    <p><a href="https://leetcode.cn/problems/rotate-list/">Leetcode 61 旋转链表</a></p>
+<h2 id="题目思路分析">题目&amp;思路分析</h2>
+<p><strong>题目</strong> 给你一个链表的头节点 <code>head</code> ，旋转链表，将链表每个节点向右移动 <code>k</code> 个位置。</p>
+<p><strong>分析</strong>  由题目中给出的例子：</p>
+<p>1&ndash;&gt;2&ndash;&gt;3&ndash;&gt;4&ndash;&gt;5 输入  k = 2</p>
+<p>输出结果为： [4,5,1,2,3]</p>
+<p>不难看出，k = 2 就是原始head往后移动了两个位置，从而尾巴上面的节点被依次“挤”到了前面来。但这里要注意的是，要完成节点位置的变换，而不是简单地修改节点的值。所以，我们可以自然想到，把原始链表变成环，再从头节点开始数到第 链表长度（记为length） - k 个位置时，把下一个节点记为新头节点，并且在此处断开指针，即可获得新的链表。</p>
+<p>至于为什么是找到 length - k 个位置，是因为“每个节点向后移动k个位置”这句话隐含的意思即为，后面k个节点都将移动到链表前面去。因此，从前往后数可以留下的节点数自然就是 length - k 个。</p>
 <h2 id="代码思路">代码思路</h2>
-<ul>
-<li>虚拟头节点</li>
-</ul>
-<p>​	凡是涉及边界处理的题设，使用虚拟头节点是最简洁的办法，最终我们只需要返回dummyHead.next即可，无需再考虑head本身也需要被反转的特殊情况。</p>
-<p>​	<code>ListNode dummyHead = new ListNode(0);</code></p>
-<p>​	<code>dummyHead.next = head;</code></p>
-<ul>
-<li>记录left的前一个节点</li>
-</ul>
-<p>​		使用变量count计数，双指针pre和cur依次遍历,直到找到left.</p>
-<p>​		<code>int count = 1;</code></p>
-<p>​		<code>ListNode pre = dummyHead;</code></p>
-<p>​		<code>ListNode cur = head;</code></p>
-<p>​		<code>while(count != left){ pre = cur; cur = cur.next; count++;}</code></p>
-<p>​		直到找到了count == left，此时的cur指向的就是第left个节点，而pre就是第left个节点的前一个节点。</p>
-<p>​		记录一下：</p>
-<p>​		<code>ListNode before = pre;</code></p>
-<p>​		<code>ListNode start = cur;</code></p>
-<p>​		这样，我们就找到了要被反转的子链表的第一个节点，和它的前一个节点。</p>
-<ul>
-<li>记录right的后一个节点</li>
-</ul>
-<p>​	同样的，我们让pre、cur以及count继续往后走，当count == right的时候，我们也就找到了需要被反转的子链表的最后一个节点，和它的后一个节点。</p>
-<p>​		<code>ListNode end = cur;</code></p>
-<p>​		<code>ListNode after = cur.next;</code></p>
-<ul>
-<li>进入反转链表逻辑</li>
-</ul>
-<p>​		反转之前，先把子链表的前后都断开。</p>
-<p>​		<code>before.next = null;</code></p>
-<p>​		<code>end.next = null;</code></p>
-<p>​		这里的链表反转逻辑就是单链表反转逻辑，不再详述。</p>
-<p>​		<code>reverse(start,end);</code></p>
-<ul>
-<li>
-<p>重新连接新的链表</p>
-<p><code>before.next = end;</code></p>
-<p><code>start.next = after;</code></p>
-</li>
-</ul>
+<p>从题意分析可以大概理清本题的一个代码思路：</p>
+<ol>
+<li>成环需要找到原链表的尾结点，让它指向头节点</li>
+<li>需要链表的长度（此处还应该考虑length 和 k 之间的关系）</li>
+<li>for循环找到 length - k 个位置，断开链表 重新返回新头节点</li>
+</ol>
+<h3 id="剪枝操作">剪枝操作</h3>
+<p>考虑到一些简单情况无需进行节点操作返回head即可，所以先来处理这些情况。</p>
+<p><code>if(head = null || head.next == null || k == 0){ return head;}</code></p>
+<p>当head本身为空，或者链表只有1个节点，或者k值为0（即移动0个位置），都是不需要对链表进行操作的，直接返回head即可。</p>
+<h3 id="寻找尾结点和计算链表长度">寻找尾结点和计算链表长度</h3>
+<p><code>ListNode last = head;</code></p>
+<p><code>int length = 1;</code></p>
+<p>注，这里length从1开始计算有几个原因：</p>
+<ol>
+<li>last是从head开始，head是链表长度为1的位置，不必从0开始</li>
+<li>接下来的循环结束条件必须是last.next != null，才能保证last最后停留的位置是链表的尾结点位置，如果length从0开始，会比实际长度小1。</li>
+</ol>
+<p>遍历寻找尾结点：</p>
+<p><code>while(last.next != null){last = last.next; length++;}</code></p>
+<p>这样，我们就得到了原始链表的长度 length。</p>
+<h3 id="处理k值">处理k值</h3>
+<p>我们不难想到，当k值为0 或者 k值为length的倍数时，链表都是无需被操作的。</p>
+<p>而当k值大于了length，也就意味着k会在这个已经成环的链表里面转圈圈，所以，我们进行如下处理：</p>
+<p><code>if(k &gt;= length){</code></p>
+<p><code>k %= length;</code></p>
+<p><code>//如果k == 0 了，说明k是length的倍数，不需要再进行链表操作了，直接返回</code></p>
+<p><code>if(k == 0){</code></p>
+<p><code>return head;}</code></p>
+<p><code>}</code></p>
+<p>以题设[1,2,3,4,5] k = 2 为例， 这个时候 k = 7 的效果实际上和k = 2 是一致的，所以可以进行预处理。</p>
+<h3 id="链表成环">链表成环</h3>
+<p>这里不难理解，直接写代码：</p>
+<p><code>ListNode temp = head;</code></p>
+<p><code>last.next = temp;</code></p>
+<h3 id="寻找新的尾节点和头节点">寻找新的尾节点和头节点</h3>
+<p><code>ListNode newTail = head;</code></p>
+<p><code>for(int i = 1; i &lt; length - k; i++){</code></p>
+<p><code>newTail = newTail.next;}</code></p>
+<p>注意两点：</p>
+<ol>
+<li>这里 i 从 1开始的原因和length从1开始的原因一致，因为是从头节点开始找的，所以已经有一个节点了，从1开始计算。</li>
+<li>length - k 是因为k已经进行了上面的预处理，k即使再大，经过求余以后也可以保证小于length，从而这个循环是有意义的。</li>
+</ol>
+<p>找到新的尾结点后，它的下一个节点就是新的头节点。</p>
+<p><code>ListNode newHead = newTail.next;</code></p>
+<p>断开环形链表，返回新头：</p>
+<p><code>newTail.next = null;</code></p>
+<p><code>return newHead;</code></p>
 <h2 id="总结">总结</h2>
-<p>本题重点是用了双指针的思路，并且只遍历了一次链表，把子链表反转逻辑切割成完整的单链表反转，在边界问题处理上使用了虚拟头节点。</p>
+<p>总体思路就是让链表成环，k在环里转圈圈，找到合适的位置断开。</p>
+<p>注意点就是处理k值和链表长度length的关系，其他部分相对简单。</p>
 
 </article>
 
 <div class="content_post_button">
     
-    <button onclick="window.location.href = 'http:\/\/flamesonly.github.io\/post\/hugo\/'">
-        <span style="color: var(--primary-color);">上一篇</span><br />如何使用hugo搭建个人静态博客（Github托管）
+    <button onclick="window.location.href = 'http:\/\/flamesonly.github.io\/post\/leetcode92\/'">
+        <span style="color: var(--primary-color);">上一篇</span><br />Leetcode 92 反转链表 II 双指针解题思路
     </button>
     
-    
-    <button onclick="window.location.href = 'http:\/\/flamesonly.github.io\/post\/leetcode61\/'">
-        <span style="color: var(--primary-color);">下一篇</span><br />Leetcode 61 旋转链表 成环方法解题思路
-    </button>
     
 </div>
 <a class="back_top" href="javascript:window.scrollTo(0,0);">
@@ -164,8 +173,16 @@
 <div class="center_main_contents_main">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#题目分析">题目分析</a></li>
-    <li><a href="#代码思路">代码思路</a></li>
+    <li><a href="#题目思路分析">题目&amp;思路分析</a></li>
+    <li><a href="#代码思路">代码思路</a>
+      <ul>
+        <li><a href="#剪枝操作">剪枝操作</a></li>
+        <li><a href="#寻找尾结点和计算链表长度">寻找尾结点和计算链表长度</a></li>
+        <li><a href="#处理k值">处理k值</a></li>
+        <li><a href="#链表成环">链表成环</a></li>
+        <li><a href="#寻找新的尾节点和头节点">寻找新的尾节点和头节点</a></li>
+      </ul>
+    </li>
     <li><a href="#总结">总结</a></li>
   </ul>
 </nav>

@@ -6,7 +6,16 @@
     <description>Recent content on Flames</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 16 Apr 2023 18:36:16 +0800</lastBuildDate><atom:link href="http://flamesonly.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Apr 2023 18:44:16 +0800</lastBuildDate><atom:link href="http://flamesonly.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode 61 旋转链表 成环方法解题思路</title>
+      <link>http://flamesonly.github.io/post/leetcode61/</link>
+      <pubDate>Wed, 19 Apr 2023 18:44:16 +0800</pubDate>
+      
+      <guid>http://flamesonly.github.io/post/leetcode61/</guid>
+      <description>Leetcode 61 旋转链表 题目&amp;amp;思路分析 题目 给你一个链表的头节点 head ，旋转链表，将链表每个节点向右移动 k 个位置。 分析 由题目中给出的例子： 1&amp;ndash;&amp;gt;2&amp;ndash;&amp;gt;3&amp;ndash;&amp;gt;4&amp;ndash;&amp;gt;5 输入 k = 2</description>
+    </item>
+    
     <item>
       <title>Leetcode 92 反转链表 II 双指针解题思路</title>
       <link>http://flamesonly.github.io/post/leetcode92/</link>
