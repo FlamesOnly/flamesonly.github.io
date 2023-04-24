@@ -6,7 +6,16 @@
     <description>Recent content on Flames</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Apr 2023 15:08:16 +0800</lastBuildDate><atom:link href="http://flamesonly.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Apr 2023 19:18:16 +0800</lastBuildDate><atom:link href="http://flamesonly.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JVM基础</title>
+      <link>http://flamesonly.github.io/post/aboutjvm/</link>
+      <pubDate>Mon, 24 Apr 2023 19:18:16 +0800</pubDate>
+      
+      <guid>http://flamesonly.github.io/post/aboutjvm/</guid>
+      <description>全称是 Java Virtual Machine，即我们常说的Java虚拟机，本质上也是一种软件，不同的操作系统需要适配不同的安装包，但JVM的最终功能都是能够执行</description>
+    </item>
+    
     <item>
       <title>Leetcode 239 滑动窗口最大值 单调队列方法解题思路</title>
       <link>http://flamesonly.github.io/post/leetcode239/</link>
