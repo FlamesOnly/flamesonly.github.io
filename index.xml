@@ -6,7 +6,16 @@
     <description>Recent content on Flames</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 24 Apr 2023 19:18:16 +0800</lastBuildDate><atom:link href="http://flamesonly.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 May 2023 20:24:16 +0800</lastBuildDate><atom:link href="http://flamesonly.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>二分查找 两种区间的思路及三道例题</title>
+      <link>http://flamesonly.github.io/post/binarysearch/</link>
+      <pubDate>Thu, 04 May 2023 20:24:16 +0800</pubDate>
+      
+      <guid>http://flamesonly.github.io/post/binarysearch/</guid>
+      <description>二分查找法，顾名思义，即每次查找过程结束后，如果未能找到目标值，就将整个区间一分为二，根据目标值与区间中点值之间的大小关系重新确定左右边界。</description>
+    </item>
+    
     <item>
       <title>JVM基础</title>
       <link>http://flamesonly.github.io/post/aboutjvm/</link>

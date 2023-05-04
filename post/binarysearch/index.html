@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html class='theme-container'>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    <title>二分查找 两种区间的思路及三道例题</title>
+
+    <link rel="canonical" href="http://flamesonly.github.io/">
+
+    
+    <link rel='stylesheet' type='text/css' href='/css/common.min.2e0fcb1a7000d167fb8edc8795fd7fa375f12491a92c7e9c4e7cbaabf45d4c90.css'/>
+    
+    <link rel='stylesheet' media='screen and (min-width: 1201px)' type='text/css'
+          href='/css/normal.min.c46acb505230270efd7c6e141090cb0d8929be27c04e426816632c376c4c49ea.css'/>
+    
+    <link rel='stylesheet' media='screen and (max-width: 1200px)' type='text/css'
+          href='/css/small.min.cff497b4416dfb7de7e24706a8a25fc3efb8dfd2f8627449c114a139a67da2a7.css'/>
+
+    
+    <link rel='stylesheet' type='text/css' href='/css/androidstudio.min.min.c0869a17349d3f1bdd078763e8c11ec9808c9f38239bb254720577662fba87bf.css'/>
+    
+    <script src="/js/highlight.min.min.527b2c4dd19de47518d2a0fbbf849f2cf1230a7e6e40ee0f416f4de8f8539fbf.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<script>
+    hljs.highlightAll();
+</script>
+<body>
+
+<div class="top">
+    <a href="/">
+        <img src="/img/logo.png"/>
+    </a>
+    <nav>
+        
+        <a href="/post/">
+            Blog
+        </a>
+        
+        <a href="/note/">
+            Note
+        </a>
+        
+        <a href="/projects/">
+            Projects
+        </a>
+        
+        <a href="/about">
+            About
+        </a>
+        
+    </nav>
+</div>
+
+<div id="center" class='center' >
+    
+<header class="center_head">
+    <h1>
+    二分查找 两种区间的思路及三道例题
+</h1>
+<div style="text-align: center;opacity: 0.5;margin-top: 0.5em;">
+    2023.05.04 20:24
+</div>
+</header>
+
+    
+<div class="center_main">
+    <a href="../" class="center_main_contents_left">
+        <h1>My Blog</h1>
+    </a>
+    <style>
+    .content_post h2::before {
+        content: "※ ";
+    }
+
+    .content_post h3::before {
+        content: "✧ ";
+    }
+</style>
+<article class="content_post heti heti--ancient">
+    <p>二分查找法，顾名思义，即每次查找过程结束后，如果未能找到目标值，就将整个区间一分为二，根据目标值与区间中点值之间的大小关系重新确定左右边界。（类似于直接砍掉一半确定不存在目标值的区间）</p>
+<p>因此，二分查找有一个重要的前提，那就是需要被查找的数组是有序的（通常来说是非递减顺序）。</p>
+<p>下面，以<a href="https://leetcode.cn/problems/binary-search/">Leetcode704 二分查找</a>为典型例题，分析两种不同取值区间的思路。</p>
+<h2 id="704-二分查找">704. 二分查找</h2>
+<p><a href="https://leetcode.cn/problems/binary-search/">Leetcode704 二分查找</a></p>
+<p><strong>题目</strong> 给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。</p>
+<p><strong>思路分析</strong> 首先，题设给出的数组是一个升序数组，说明数组中的元素从小到大排列且没有重复元素，这是非常典型和适合使用二分查找的前提条件。</p>
+<h3 id="查找区间">查找区间</h3>
+<p>二分查找法最重要的就是确定每一次“砍掉一半”以后，新的区间应该如何确定的问题。</p>
+<p>一般来说，常用的区间就是左闭右闭（ [ left, right ] ），和左闭右开（ [ left, right ））两种取值区间。在不同的题目下，可能使用其中一种区间取值会是更优解，两种解法无优劣之分，下面就这道题目给出两种区间的解题和代码思路。</p>
+<h3 id="左闭右闭--left-right--">左闭右闭（ [ left, right ] ）</h3>
+<p>首先给出左闭右闭区间时代码：</p>
+<div class="highlight">
+    <span class="highlight-type">java</span>
+    <pre><code class="language-java hljs" data-lang="java">class Solution {
+    public int search(int[] nums, int target) {
+        // 说明数组中没有元素 或者数组本身为null 肯定不会有目标值存在
+        if(nums.length == 0 || nums == null){
+            return -1;
+        }
+
+        int left = 0;
+      
+				while(left &lt;= right){
+          
+				  int mid = left &#43; (right - left) / 2; 
+          
+				  if(nums[mid] &lt; target){
+ 				   //说明区间中点值小于目标值，目标肯定在右边一半的区间
+    			left = mid &#43; 1;
+  				}else if(nums[mid] &gt; target){
+  			  //区间中点大于目标值，目标肯定在左边一半的区间
+  				  right = mid - 1;
+  				}else {
+  			  //区间中点刚好等于目标值
+ 			  	 return mid;
+            
+  			}
+          
+          //说明当循环结束，还是没有找到target 返回-1
+          return -1;
+			}
+}</code></pre>
+</div>
+
+<style>
+    .highlight-type {
+        content: "java";
+        position: absolute;
+        opacity: 0.5;
+    }
+</style><p>以上，是我们对区间进行左闭右闭定义时采取的循环条件和区间取值办法，下面来进行详细说明。</p>
+<ol>
+<li>进入循环的条件为什么是left &lt;= right ？</li>
+</ol>
+<p>​		如上所述，我们将区间定义为[left, right]，只要这是一个合法区间，我们就应该进入区间进行查找。由于区间左闭右闭，所以left == right 仍然是有意义的，应当进入循环。</p>
+<ol start="2">
+<li>left = mid + 1 和 right = mid - 1是如何得出？</li>
+</ol>
+<p>​		这个问题结合 if 条件句中的判断条件来看，nums[mid] 无论小于还是大于target，都说明了它一定不是我们需要查找的目标值，那么在一个闭合区间内，不需要再放一个已知不可能是答案的值，所以无论移动left还是移动right，都可以直接跳过mid。</p>
+<p>掌握这两个关键问题，就掌握了二分查找法的核心。</p>
+<h3 id="左闭右开--left-right-">左闭右开（ [ left, right ））</h3>
+<div class="highlight">
+    <span class="highlight-type">java</span>
+    <pre><code class="language-java hljs" data-lang="java">class Solution {
+    public int search(int[] nums, int target) {
+      if(nums.length == 0 || nums == null){
+        return -1;
+      }
+      
+      int left = 0;
+      //注意，当区间取值为左闭右开时，right就不能再从nums.length - 1开始了
+      int right = nums.length;
+      
+      while(left &lt; right){
+        int mid = left &#43; (right - left) / 2;
+        
+        if(nums[mid] &lt; target){
+          left = mid &#43; 1;
+        }else if(nums[mid] &gt; target){
+          //注意看区别
+          right = mid;
+        }else {
+          return mid;
+        }
+      }
+      
+      return -1;
+    }
+}</code></pre>
+</div>
+
+<style>
+    .highlight-type {
+        content: "java";
+        position: absolute;
+        opacity: 0.5;
+    }
+</style><p>在这种区间取值办法中，我们可以注意到，进入循环的条件发生了变化，right 边界在改变时也发生了变化。</p>
+<p>所以，这里需要搞清楚的两个问题分别是：</p>
+<ol>
+<li>为什么循环条件变成了 left  &lt; right ? （为什么right初始值不是nums.length - 1 ，而是nums.length?</li>
+</ol>
+<p>​		[ left,  right ) 由左闭右开的定义可知，这个区间可以取到left，但是永远取不到right。这也是为什么一开始我们要把right = nums.length，如果right 仍然从数组的最后一个元素开始取，那么就永远查询不到target就是最后一个元素的情况，因为左闭右开区间，右区间的临界点值是永远取不到的。</p>
+<p>​		所以如果区间取不到right，那么当left == right 的时候， 这就已经不是一个合法区间了，不必再进入循环。2.</p>
+<ol start="2">
+<li>为什么当 区间中点值大于target的时候，right正好取到mid？</li>
+</ol>
+<p>​		这个问题和问题1的本质是一样的，由于左闭右开区间永远不会取到right，但是却会取到刚好在right左边的这个值，举个例子：</p>
+<p>​		<code>[1,2,3,4,5] target = 2</code></p>
+<p>​		第一轮循环时，下标为mid的元素为3，那么需要移动right，如果right = mid -1，那么下一轮查找的区间就会变成[0, 1)，而其中包含的元素其实是[1,2），但是由于区间左闭右开，2永远不能被区间给取到，我们也就直接漏掉了正确答案。所以，right 只能取mid，因为mid已经被证实了不等于target，所以right 完全可以等于mid。</p>
+<h3 id="总结">总结</h3>
+<p>由这两种思路对比可知，区间定义的不同将会直接影响到循环条件和右边界的取值，搞清楚不同区间定义和二者之间的关系，就搞清楚了二分查找的基本思路。</p>
+<h2 id="例题一-35搜索插入位置左闭右闭">例题一 35.搜索插入位置（左闭右闭）</h2>
+<p>下面我们再以两道例题，来深刻体验一下两种区间定义的区别。</p>
+<p><a href="https://leetcode.cn/problems/search-insert-position/">Leetcode 35.搜索插入位置</a></p>
+<p><strong>题目</strong> 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
+<p>请必须使用时间复杂度为 O(log n) 的算法。</p>
+<p><strong>思路分析</strong> 题目中的几个重点：1、排序数组  2、查找目标值 ，这是典型的二分查找应用的前提。这道题目只不过是在704.二分查找的基础上增加了一个如果不存在目标值如何处理的情况。</p>
+<h3 id="区间选择">区间选择</h3>
+<p>这道题目用两种区间定义都是可以解决的，为了更加深刻地理解左闭右闭区间， 我们暂且先采用这种定义。</p>
+<h3 id="代码思路">代码思路</h3>
+<div class="highlight">
+    <span class="highlight-type">java</span>
+    <pre><code class="language-java hljs" data-lang="java">class Solution {
+    public int searchInsert(int[] nums, int target) {
+      // 由于数组是升序无重复元素的数组，所以如果target小于了nums[0],它就需要被排在索引为0的位置
+        if(target &lt; nums[0] || nums.length == 0 || nums == null){
+            return 0;
+        }
+      
+      //同理 如果target大于了数组中最大的元素，就直接给排到最后，不用进循环了
+        if(target &gt; nums[nums.length - 1]){
+            return nums.length;
+        }
+      
+      
+        int left = 0;
+        int right = nums.length - 1;
+        //左闭右闭
+        while(left &lt;= right){
+            int mid = left &#43; (right - left) / 2;
+            if(target &gt; nums[mid]){
+                left = mid &#43; 1;
+            }else if(target &lt; nums[mid]){
+                right = mid - 1;
+            }else {
+                return mid;
+            }
+        }
+      
+      //为什么是left，下面进行详细说明
+        return left;
+    }
+}</code></pre>
+</div>
+
+<style>
+    .highlight-type {
+        content: "java";
+        position: absolute;
+        opacity: 0.5;
+    }
+</style><p>处理完毕target小于第一个元素 以及target大于最后一个元素的简单情况，剩下的就是target的大小在数组大小的范围内的情况了，此时也有两种情况。</p>
+<ol>
+<li>数组中存在target</li>
+</ol>
+<p>​		这种情况就是典型的二分查找写法，这里不再赘述。</p>
+<ol start="2">
+<li>数组中不存在target，所以target需要被插入到数组中间的位置。</li>
+</ol>
+<p>​		这种情况，在代码中的体现只有一个 return left ; 那么究竟为什么应该插入的位置是最后left停留的位置呢？</p>
+<p>​		这就涉及到左闭右闭区间定义时，循环结束条件的写法了。我们知道，如果数组中不存在target，那么当循环结束时，必然已经是left &gt; right 。举个例子：</p>
+<p>​			<code>[1,3,5,7] target = 6</code></p>
+<p>​		目标值不存在于数组中，所以循环会经历这样的过程：</p>
+<div class="highlight">
+    <span class="highlight-type">java</span>
+    <pre><code class="language-java hljs" data-lang="java">// 第一轮循环 初始时
+left = 0 
+right = 3;
+mid = 1；
+//进行条件判断后
+left = 2
+right = 3;
+[1, 3, 5, 6]
+       l  r 
+
+//第二轮循环 初始时
+left = 2
+right = 3
+mid = 2
+//进行条件判断后 5 &lt; 6 移动left
+left = 3 right =3
+[1, 3, 5, 7]
+          l&amp;r
+
+   //此时 left 和 right 已经相等了，但由于是合法区间，所以再进一次循环
+         //此时 mid == 3 但是 7 &gt; 6 所以移动right
+         
+//所以，当循环结束时，会变成
+[1, 3, 5, 7]
+       r  l 
+         
+//由此我们也可以得出一个结论，如果将区间定义为左闭右闭，那么找不到值，循环结束后会变成right在左，left在右的情况
+     // 此时一定是 nums[right] &lt; target &lt; nums[left] 的情况，由插入规则可以得出，应当返回left
+         </code></pre>
+</div>
+
+<style>
+    .highlight-type {
+        content: "java";
+        position: absolute;
+        opacity: 0.5;
+    }
+</style><h2 id="例题二-278-第一个错误的版本httpsleetcodecnproblemsfirst-bad-version左闭右开">例题二 <a href="https://leetcode.cn/problems/first-bad-version/">278. 第一个错误的版本</a>（左闭右开）</h2>
+<p>上面讲解了一种使用左闭右闭区间思路的例题，而第二题则是使用左闭右开区间更加方便快捷的。</p>
+<p><a href="https://leetcode.cn/problems/first-bad-version/">Leetcode 278. 第一个错误的版本</a></p>
+<p><strong>题目</strong> 你是产品经理，目前正在带领一个团队开发新的产品。不幸的是，你的产品的最新版本没有通过质量检测。由于每个版本都是基于之前的版本开发的，所以错误的版本之后的所有版本都是错的。</p>
+<p>假设你有 n 个版本 [1, 2, &hellip;, n]，你想找出导致之后所有版本出错的第一个错误的版本。</p>
+<p>你可以通过调用 bool isBadVersion(version) 接口来判断版本号 version 是否在单元测试中出错。实现一个函数来查找第一个错误的版本。你应该尽量减少对调用 API 的次数。</p>
+<p><strong>思路分析</strong>  由1 - n 之间的正整数，显然是单调递增的，符合二分查找的应用前提。但问题在于，1 - n 之间判定条件只有两种结果，要么是false（版本正确），要么是true（版本错误）。 无法像传统二分法那样一直砍一半直到找到一个mid符合条件，因为可能有无数个mid都符合条件。并且题目中还要求尽量减少调用 isBadVersion（）的次数，所以暴力解法显然会超时。</p>
+<h2 id="代码思路-1">代码思路</h2>
+<p>首先我们来看一种暴力解法：</p>
+<div class="highlight">
+    <span class="highlight-type">java</span>
+    <pre><code class="language-java hljs" data-lang="java">public class Solution extends VersionControl {
+    public int firstBadVersion(int n) {
+        int left = 1;
+        int right = n;
+
+        while(left &lt; right) {
+            int mid = left &#43; (right - left) / 2;
+
+            if(!isBadVersion(mid)){
+                left = mid &#43; 1
+            }else {
+               right = mid;
+              break;
+            }
+        }
+      
+      while(right - 1 &gt;= 0 &amp;&amp; isBadVersion(right - 1) ){
+        right--;
+      }
+      
+      return right;    
+    }
+}</code></pre>
+</div>
+
+<style>
+    .highlight-type {
+        content: "java";
+        position: absolute;
+        opacity: 0.5;
+    }
+</style><p>这种暴力思路非常好理解，先用二分查找法，找到一个错误的版本，直接将right移动到这里，然后一个一个往前判断，只要前面还是true，right就一直往前走，直到找到第一个错误版本。</p>
+<p>好理解，但缺点是这很有可能会调用很多次isBadVersion。举个例子，假如n为20000000，但实际上错误版本从第2个就开始了，那么第二个while循环将会从right = 10000000开始一直往前，调用10000000 -1 次，这显然是非常浪费资源的，事实上，这种暴力解法也会超时无法AC。</p>
+<h3 id="正确思路">正确思路</h3>
+<div class="highlight">
+    <span class="highlight-type">java</span>
+    <pre><code class="language-java hljs" data-lang="java">public class Solution extends VersionControl {
+    public int firstBadVersion(int n) {
+        int left = 1;
+        int right = n;
+
+        //左闭右开区间
+        while(left &lt; right) {
+            int mid = left &#43; (right - left) / 2;
+
+            if(isBadVersion(mid)){
+                right = mid;
+            }else {
+                left = mid &#43; 1;
+            }
+        }
+
+        return left;
+    }
+}</code></pre>
+</div>
+
+<style>
+    .highlight-type {
+        content: "java";
+        position: absolute;
+        opacity: 0.5;
+    }
+</style><p>为什么说本题更加适合用左闭右开的思路呢？</p>
+<p>​		首先，与传统二分查找不同的是，这道题目中有多个版本满足“错误版本”的条件，如果像上面那样采取死循环，一定会超时。所以我们肯定希望，用二分法结束循环的时候，区间里最好只剩下1个值，正好是我们需要寻找的起点。而左闭右开区间的结束条件是可以符合这个情况的，因为当左闭右开区间结束循环时，正好 left == right。</p>
+<p>那么我们继续思考，在这里使用二分法，每一次查找的边界应该如何改变呢？依据什么条件呢？</p>
+<p>​		由题设可知，如果用isBadVersion（）进行判断的话，版本情况实际上应该是这样的：</p>
+<p>​		<code>[false , false ………… , true , true …………true]</code></p>
+<p>所以，很显然， 当mid为false的时候，需要继续移动left，以缩小和正确答案之间的距离；而当mid取值为true的时候，应该移动right，因为mid不一定就是第一个错误的版本，但它之后的版本一定不是第一个错误版本，排除后面的情况。</p>
+<p>举个例子：</p>
+<p><code>[false, false, false , true, true];</code></p>
+<p>此时n = 5 , bad = 4;</p>
+<p>第一个mid：left + （right - left ）/ 2 = 3  false   left 移动到mid + 1 所以left = 4，实际上已经到了正确答案，但由于right还没能被缩小，所以继续进入循环。</p>
+<p>第二个mid：mid = 4, 已经为 true，需要移动right = mid，此时区间已经缩小为[4 , 4），left == right ，此时left或者right都是正确的返回值。</p>
+<p>如果使用左闭右闭区间，最后会变成right = 3，left = 4，需要额外判定left到达的地方是否为起点的情况，所以显然这里使用左闭右开区间是更优解。</p>
+<h2 id="总结-1">总结</h2>
+<p>二分查找法是解决有序数组中查找元素问题的经典解法，其难点就在于区间定义和边界取值，有时候结合两种不同区间的循环结束状态，可以选择更优解。</p>
+
+</article>
+
+<div class="content_post_button">
+    
+    <button onclick="window.location.href = 'http:\/\/flamesonly.github.io\/post\/aboutjvm\/'">
+        <span style="color: var(--primary-color);">上一篇</span><br />JVM基础
+    </button>
+    
+    
+</div>
+<a class="back_top" href="javascript:window.scrollTo(0,0);">
+    <svg t="1660722824713" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        p-id="1359" width="64" height="64">
+        <path
+            d="M484 93.668c-231.038 0-418.333 187.296-418.333 418.335 0 231.038 187.296 418.327 418.333 418.327 231.036 0 418.333-187.289 418.333-418.327C902.334 280.964 715.036 93.668 484 93.668zM372.207 811.881c-0.412 8.174-4.906 12.669-13.493 13.493-6.545 0-11.863-0.614-15.946-1.841-4.504-1.639-6.545-4.906-6.133-9.813 1.629-4.906 4.695-7.148 9.199-6.746 6.948 1.639 10.215 0.613 9.813-3.066l0-96.902-12.266 0c-4.504-0.402-6.746-3.268-6.746-8.586 0.402-4.907 2.855-7.562 7.359-7.974l36.185 0c2.453 0 4.083 1.025 4.906 3.066 1.227-2.855 3.469-4.494 6.747-4.906l82.183 0c4.495 0.412 6.747 3.277 6.747 8.587-0.412 5.318-2.865 8.184-7.36 8.586l-36.798 0-2.453 11.652 23.919 0c10.215-0.402 14.92 3.891 14.106 12.88l0 63.17c-0.412 4.504-3.277 6.957-8.586 7.36-5.318-0.403-8.184-2.856-8.586-7.36l0-57.037c0-1.227-0.613-1.84-1.84-1.84l-43.545 0c-0.824 0.412-1.438 1.025-1.84 1.84l0 55.811c-0.412 4.906-3.277 7.57-8.586 7.974-5.318-0.403-8.184-3.067-8.586-7.974l0-61.943c0-8.586 3.68-12.88 11.04-12.88l14.719 0 3.066-11.652-25.759 0c-2.453 0-5.117-1.016-7.973-3.066-1.227 2.865-3.479 4.293-6.746 4.293l-6.747 0L372.207 811.881zM479.536 824.146c-3.277 4.907-7.571 5.722-12.879 2.454-2.865-1.227-7.571-3.891-14.106-7.974-6.133-3.277-10.838-5.52-14.106-6.746-6.133-2.855-8.586-6.334-7.359-10.426-1.227 2.051-3.68 4.504-7.36 7.359-0.412 0.412-0.824 0.824-1.227 1.227-9.41 7.762-20.239 13.896-32.505 18.399-5.73 1.629-9.813 0.201-12.266-4.294-1.639-4.906 0-8.586 4.906-11.039 18.802-7.762 30.253-15.534 34.345-23.306 4.494-7.359 6.746-21.054 6.746-41.091 0.403-5.722 3.067-8.788 7.973-9.2 5.309 0.412 8.174 3.479 8.586 9.2 0.814 20.852-1.639 36.798-7.36 47.837 4.083-4.906 9.401-5.107 15.946-0.613 4.907 2.865 11.442 6.546 19.626 11.04 3.68 2.453 6.334 4.092 7.973 4.906C481.375 814.736 482.391 818.828 479.536 824.146zM556.198 822.307l-41.704 0c-7.772-0.412-11.864-3.891-12.267-10.426l0-34.345c-0.412-8.989 3.68-13.282 12.267-12.88l42.931 0c7.763-0.402 11.653 3.891 11.653 12.88l0 34.958C569.48 819.029 565.188 822.307 556.198 822.307zM614.462 817.4c-6.545 0-11.652-0.824-15.332-2.453-4.092-2.051-5.318-5.309-3.68-9.813 1.629-4.906 5.107-6.747 10.426-5.52 11.04 2.453 15.735-1.841 14.106-12.88-0.412-8.174-5.933-18.399-16.56-30.665-3.68-3.68-4.293-9.2-1.84-16.56 4.494-13.895 7.561-24.532 9.199-31.892l-16.559 0c-1.227 0-2.051 0.824-2.453 2.453l0 110.395c-0.412 5.31-3.067 8.175-7.974 8.587-5.318-0.412-8.184-3.277-8.586-8.587l0-65.01c-1.227 1.639-2.865 2.453-4.906 2.453l-69.304 0c-4.504-0.402-6.957-3.268-7.359-8.586 0.402-5.31 2.855-8.175 7.359-8.587l14.72 0c-0.824-0.814-3.68-5.721-8.586-14.719-2.051-5.31-0.613-8.989 4.293-11.04l-7.36 0c-4.504-0.402-6.957-3.268-7.359-8.586 0.402-5.309 2.855-8.174 7.359-8.586l22.079 0c-0.824-1.227-1.227-2.453-1.227-3.681-1.227-4.082 0.613-7.359 5.52-9.813 5.721-2.041 9.401-1.016 11.04 3.066 1.227 3.68 2.654 7.158 4.293 10.427l20.239 0c4.494 0.412 6.947 3.277 7.359 8.586-0.412 5.318-2.865 8.184-7.359 8.586l-47.225 0c2.855 1.639 6.334 7.36 10.426 17.173 1.227 4.092 0.814 6.957-1.227 8.586l13.493 0c0.402-1.227 1.016-2.855 1.84-4.906 2.453-6.133 4.082-11.039 4.906-14.72 1.629-4.082 5.107-5.721 10.426-4.906 4.906 2.051 6.747 5.318 5.521 9.813-0.824 2.051-1.639 4.504-2.454 7.359-1.227 3.277-2.252 5.932-3.066 7.973l11.04 0c2.453 0 4.082 0.613 4.906 1.84l0-41.704c0-8.175 3.066-12.056 9.199-11.653l36.799 0c9.4 0 13.08 5.117 11.039 15.333 0 0.412-1.025 3.891-3.066 10.426-3.277 10.226-5.52 17.786-6.746 22.692-1.227 3.68-1.84 6.344-1.84 7.973 0.402 1.228 1.629 3.067 3.68 5.521 8.586 13.09 13.281 25.356 14.105 36.798C638.17 807.387 630.408 816.988 614.462 817.4zM646.896 466.315c-7.488 7.449-18.815 7.642-25.649 0.806-0.538-0.537-1.074-0.922-1.536-1.535L502.752 348.858l-0.192 280.106c0 9.139-8.601 16.549-19.198 16.549-10.598 0-18.738-7.41-18.738-16.549 0-0.729-0.115-1.306 0-2.034l-0.192-278.072L347.513 465.586c-0.422 0.652-0.959 0.999-1.536 1.535-6.834 6.874-18.162 6.681-25.649-0.806-7.488-7.488-8.025-19.122-1.152-25.995L467.12 292.03c2.112-3.263 5.26-5.913 9.369-7.333 2.074-0.807 4.262-1.152 6.528-1.113 0.23 0 0.383-0.116 0.614-0.116 0.153 0 0.307 0.078 0.46 0.078 2.304-0.078 4.57 0.307 6.72 1.152 3.994 1.421 7.142 4.07 9.254 7.219L648.048 440.32C654.92 447.155 654.383 458.827 646.896 466.315zM636.605 238.121 331.771 238.121c-9.407 0-17.049-7.564-17.049-16.857 0-9.292 7.642-16.856 17.049-16.856l304.835 0c9.445 0 17.048 7.564 17.048 16.856C653.653 230.557 646.013 238.121 636.605 238.121zM549.452 781.829 521.24 781.829c-1.227 0-2.051 0.824-2.453 2.453l0 19.013c0.402 1.639 1.227 2.453 2.453 2.453l28.212 0c1.629-0.402 2.453-1.227 2.453-2.453l0-19.013C551.905 782.653 551.081 781.829 549.452 781.829z"
+            p-id="1360" fill="#343232"></path>
+    </svg>
+</a>
+
+
+    <div class="center_main_contents_title">
+    <h2>目录</h2>
+</div>
+<div class="center_main_contents_main">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#704-二分查找">704. 二分查找</a>
+      <ul>
+        <li><a href="#查找区间">查找区间</a></li>
+        <li><a href="#左闭右闭--left-right--">左闭右闭（ [ left, right ] ）</a></li>
+        <li><a href="#左闭右开--left-right-">左闭右开（ [ left, right ））</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#例题一-35搜索插入位置左闭右闭">例题一 35.搜索插入位置（左闭右闭）</a>
+      <ul>
+        <li><a href="#区间选择">区间选择</a></li>
+        <li><a href="#代码思路">代码思路</a></li>
+      </ul>
+    </li>
+    <li><a href="#例题二-278-第一个错误的版本httpsleetcodecnproblemsfirst-bad-version左闭右开">例题二 <a href="https://leetcode.cn/problems/first-bad-version/">278. 第一个错误的版本</a>（左闭右开）</a></li>
+    <li><a href="#代码思路-1">代码思路</a>
+      <ul>
+        <li><a href="#正确思路">正确思路</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结-1">总结</a></li>
+  </ul>
+</nav>
+</div>
+</div>
+
+</div>
+</body>
+
+
+
+
+
+</html>
