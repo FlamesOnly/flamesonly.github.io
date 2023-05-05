@@ -107,7 +107,8 @@
         }
 
         int left = 0;
-      
+        int right = nums.length - 1;
+
 				while(left &lt;= right){
           
 				  int mid = left &#43; (right - left) / 2; 
@@ -127,6 +128,7 @@
           //说明当循环结束，还是没有找到target 返回-1
           return -1;
 			}
+    }
 }</code></pre>
 </div>
 
